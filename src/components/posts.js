@@ -16,7 +16,7 @@ const Post = () => {
       data.append('type', 'flat');
       data.append('data', JSON.stringify([{record_id: 'testinggggg'}]));
 
-      axios('/api/post/?apiurl=https://redcap.ualberta.ca/api/', data)
+      axios.post('/api/post/?apiurl=https://redcap.ualberta.ca/api/', data)
         .then(result => {
           setPost(result);
         })
