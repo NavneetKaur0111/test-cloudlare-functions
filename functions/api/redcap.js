@@ -1,5 +1,5 @@
 export function onRequest(request) {
-  return new Response(null, {
-    status: 201
-  });
+  return fetch('https://redcap.ualberta.ca/api/', {
+    data: [{record_id: '1'}]
+  })
 }
