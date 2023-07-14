@@ -18,11 +18,9 @@ const Post = () => {
       const resp = axios('/api/post/?apiurl=https://redcap.ualberta.ca/api/', data)
         .then(result => {
           setPost(result);
-          return resolve(result)
         })
         .catch(error => {
           setError(error);
-          return reject(error)
         });
 
       // const resp = await fetch(`/api/post/?apiurl=https://redcap.ualberta.ca/api/`);
