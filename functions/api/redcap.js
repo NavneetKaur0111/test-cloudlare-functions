@@ -1,5 +1,5 @@
-export default {
-  async fetch(request) {
+export function onRequest(context) {
+  return async fetch(request) {
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
@@ -151,4 +151,4 @@ export default {
 
     return rawHtmlResponse(DEMO_PAGE);
   }
-};
+}
