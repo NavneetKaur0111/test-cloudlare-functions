@@ -7,7 +7,7 @@ const Post = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const resp = await fetch(`/api/post`);
+      const resp = await fetch(`/api/post/https://compass-fasd-redcap-cors-proxy.tactica.workers.dev/corsproxy/?apiurl=https://redcap.ualberta.ca/api/`);
       const postResp = await resp.json();
       setPost(postResp);
     };
