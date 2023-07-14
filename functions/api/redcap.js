@@ -134,10 +134,7 @@ export function onRequest(request) {
       // Handle requests to the API server
       return handleRequest(request);
     } else {
-      return new Response(null, {
-        status: 405,
-        statusText: "Method Not Allowed",
-      });
+      return handleRequest(request);
     }
   } else {
     return rawHtmlResponse(DEMO_PAGE);
