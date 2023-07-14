@@ -1,5 +1,8 @@
-export default {
-  async fetch(request) {
+export async function onRequestPost({ request, env }) {
+  return await submitHandler({ request, env });
+};
+
+async function submitHandler ({ request, env }) {
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
@@ -146,5 +149,4 @@ export default {
     } else {
       return rawHtmlResponse(DEMO_PAGE);
     }
-  },
 };

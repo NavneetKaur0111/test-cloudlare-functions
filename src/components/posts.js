@@ -23,8 +23,6 @@ const Post = () => {
         .catch(error => {
           setError(error);
         });
-
-      // const resp = await fetch(`/api/post/?apiurl=https://redcap.ualberta.ca/api/`);
     };
 
     getPost();
