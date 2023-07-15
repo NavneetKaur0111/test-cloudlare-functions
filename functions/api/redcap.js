@@ -1,4 +1,5 @@
-export function onRequest(request) {
+export function onRequest(context) {
+  const {request} = context;
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
