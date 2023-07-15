@@ -18,9 +18,11 @@ const Post = () => {
 
       axios.post('/api/redcap/corsproxy', data)
         .then(result => {
+          console.log(result);
           setPost(result);
         })
         .catch(error => {
+          console.log(error);
           setError(error);
         });
     };
