@@ -1,6 +1,12 @@
 export function onRequest(context) {
   const {request} = context;
   console.log(context)
+
+  return new Response(null, {
+    status: 201,
+    data: context
+  });
+
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
