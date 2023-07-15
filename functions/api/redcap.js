@@ -75,7 +75,13 @@ export function onRequest(request) {
     // Rewrite request to point to API URL. This also makes the request mutable
     // so you can add the correct Origin header to make the API server think
     // that this request is not cross-site.
-    request = new Request(apiUrl, request);
+    const data = new FormData();
+    data.append('token', process.env.REACT_APP_REDCAP_TOKEN);
+    data.append('format', 'json');
+    data.append('content', 'record');
+    data.append('type', 'flat');
+    data.append('data', JSON.stringify([{record_id: 'testinggggg'}]));
+    request = new Request(apiUrl, data);
     request.headers.set("Origin", new URL(apiUrl).origin);
     let response = await fetch(request);
     // Recreate the response so you can modify the headers
@@ -118,19 +124,7 @@ export function onRequest(request) {
 
   const url = new URL(request.url);
   if (url.pathname.startsWith(PROXY_ENDPOINT)) {
-    if (request.method === "OPTIONS") {
-      // Handle CORS preflight requests
-      return handleOptions(request);
-    } else if (
-      request.method === "GET" ||
-      request.method === "HEAD" ||
-      request.method === "POST"
-    ) {
-      // Handle requests to the API server
       return handleRequest(request);
-    } else {
-      return handleRequest(request);
-    }
   } else {
     return rawHtmlResponse(DEMO_PAGE);
   }
