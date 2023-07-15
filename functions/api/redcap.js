@@ -1,5 +1,8 @@
+import {logger} from "../../src/utils";
+
 export function onRequest(context) {
   const {request} = context;
+  logger.debug(context)
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
