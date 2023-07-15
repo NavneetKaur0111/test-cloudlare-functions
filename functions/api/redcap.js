@@ -119,14 +119,20 @@ export function onRequest(request) {
   if (url.pathname.startsWith(PROXY_ENDPOINT)) {
     if (request.method === "OPTIONS") {
       // Handle CORS preflight requests
-      return handleOptions(request);
+      return new Response(null, {
+        status: 203,
+        statusText: "No Headers",
+      });
     } else if (
       request.method === "GET" ||
       request.method === "HEAD" ||
       request.method === "POST"
     ) {
       // Handle requests to the API server
-      return handleRequest(request);
+      return new Response(null, {
+        status: 202,
+        statusText: "No Headers",
+      });
     } else {
       return new Response(null, {
         status: 201,
