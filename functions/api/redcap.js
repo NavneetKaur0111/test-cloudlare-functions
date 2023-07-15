@@ -5,7 +5,7 @@ export function onRequest(request) {
     "Access-Control-Max-Age": "86400",
   };
 
-  const API_URL = "https://examples.cloudflareworkers.com/demos/demoapi";
+  const API_URL = "https://redcap.ualberta.ca/api/";
 
   // The endpoint you want the CORS reverse proxy to be on
   const PROXY_ENDPOINT = "/corsproxy/";
@@ -70,12 +70,7 @@ export function onRequest(request) {
     `;
 
   async function handleRequest(request) {
-    const url = new URL(request.url);
-    let apiUrl = url.searchParams.get("apiurl");
-
-    if (apiUrl == null) {
-      apiUrl = API_URL;
-    }
+    const apiUrl = API_URL
 
     // Rewrite request to point to API URL. This also makes the request mutable
     // so you can add the correct Origin header to make the API server think
