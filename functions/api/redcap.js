@@ -5,7 +5,7 @@ export function onRequest(request) {
     "Access-Control-Max-Age": "86400",
   };
 
-  const API_URL = "https://redcap.ualberta.ca/api/";
+  const API_URL = "https://redcap.ualberta.ca/api/\n";
 
   // The endpoint you want the CORS reverse proxy to be on
   const PROXY_ENDPOINT = "/corsproxy/";
@@ -70,19 +70,12 @@ export function onRequest(request) {
     `;
 
   async function handleRequest(request) {
-    const apiUrl = API_URL
 
     // Rewrite request to point to API URL. This also makes the request mutable
     // so you can add the correct Origin header to make the API server think
     // that this request is not cross-site.
-    const data = new FormData();
-    data.append('token', process.env.REACT_APP_REDCAP_TOKEN);
-    data.append('format', 'json');
-    data.append('content', 'record');
-    data.append('type', 'flat');
-    data.append('data', JSON.stringify([{record_id: 'testinggggg'}]));
-    request = new Request(apiUrl, data);
-    request.headers.set("Origin", new URL(apiUrl).origin);
+    request = new Request(API_URL, request);
+    request.headers.set("Origin", new URL(API_URL).origin);
     let response = await fetch(request);
     // Recreate the response so you can modify the headers
 
@@ -124,7 +117,22 @@ export function onRequest(request) {
 
   const url = new URL(request.url);
   if (url.pathname.startsWith(PROXY_ENDPOINT)) {
+    if (request.method === "OPTIONS") {
+      // Handle CORS preflight requests
+      return handleOptions(request);
+    } else if (
+      request.method === "GET" ||
+      request.method === "HEAD" ||
+      request.method === "POST"
+    ) {
+      // Handle requests to the API server
       return handleRequest(request);
+    } else {
+      return new Response(null, {
+        status: 201,
+        statusText: "No Headers",
+      });
+    }
   } else {
     return rawHtmlResponse(DEMO_PAGE);
   }
