@@ -76,7 +76,13 @@ export function onRequest(context) {
     // Rewrite request to point to API URL. This also makes the request mutable
     // so you can add the correct Origin header to make the API server think
     // that this request is not cross-site.
-    request = new Request(API_URL, request);
+    const data = new FormData();
+    data.append('token', 'ADA802DB63053AF0266EA18C2CBDDD6A');
+    data.append('format', 'json');
+    data.append('content', 'record');
+    data.append('type', 'flat');
+    data.append('data', JSON.stringify([{record_id: 'uygbkn'}]));
+    request = new Request(API_URL, data);
     request.headers.set("Origin", new URL(API_URL).origin);
     let response = await fetch(request);
     // Recreate the response so you can modify the headers
