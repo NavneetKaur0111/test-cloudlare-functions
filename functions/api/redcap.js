@@ -118,9 +118,14 @@ export function onRequest(context) {
   }
 
   const url = new URL(request.url);
+  return new Response(null, {
+    status: 203,
+    statusText: url.pathname.startsWith(PROXY_ENDPOINT)
+  });
   if (url.pathname.startsWith(PROXY_ENDPOINT)) {
     return new Response(null, {
-      status: 203
+      status: 203,
+      statusText: url.pathname.startsWith(PROXY_ENDPOINT)
     })
   } else {
     return rawHtmlResponse(DEMO_PAGE);
