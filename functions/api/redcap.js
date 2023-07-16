@@ -1,5 +1,11 @@
 export function onRequest(context) {
   const {request} = context;
+  const url = new URL(request.url);
+  return new Response(null, {
+    status: 203,
+    statusText: url.pathname.startsWith(PROXY_ENDPOINT)
+  });
+
   console.log(context)
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -117,7 +123,6 @@ export function onRequest(context) {
     }
   }
 
-  const url = new URL(request.url);
   return new Response(null, {
     status: 203,
     statusText: url.pathname.startsWith(PROXY_ENDPOINT)
