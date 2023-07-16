@@ -127,15 +127,18 @@ export function onRequest(context) {
   if (url.pathname.startsWith(PROXY_ENDPOINT)) {
     if (request.method === "OPTIONS") {
       // Handle CORS preflight requests
+      console.log('It has options as its method')
       return handleOptions(request);
     } else if (
       request.method === "GET" ||
       request.method === "HEAD" ||
       request.method === "POST"
     ) {
+      console.log('It has multiple method')
       // Handle requests to the API server
       return handleRequest(request);
     } else {
+      console.log('It does not have any method')
       return new Response(null, {
         status: 400,
       });
