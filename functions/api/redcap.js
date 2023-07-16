@@ -119,10 +119,7 @@ export function onRequest(context) {
 
   const url = new URL(request.url);
   // if (url.pathname.startsWith(PROXY_ENDPOINT)) {
-    return new Response(null, {
-      status: 203,
-      statusText: url.pathname.startsWith(PROXY_ENDPOINT)
-    })
+  return handleRequest()
   // } else {
   //   return rawHtmlResponse(DEMO_PAGE);
   // }
