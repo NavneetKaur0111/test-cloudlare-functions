@@ -7,7 +7,7 @@ export function onRequest(context) {
     "Access-Control-Max-Age": "86400",
   };
 
-  const API_URL = "https://redcap.ualberta.ca/api/\n";
+  const API_URL = "https://redcap.ualberta.ca/api/";
 
   // The endpoint you want the CORS reverse proxy to be on
   const PROXY_ENDPOINT = "/corsproxy/";
